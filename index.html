@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spin Shawerma</title>
+    <link rel="shortcut icon" href="shawarma.png" type="image/x-icon">
+    <bgsound src="music.mp3" loop="-1" balance="0" volume="0">
+    <style>
+        html { overflow:  hidden; }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow-x:hidden;
+        }
+
+        img {
+            width: 70%;
+            animation: spinShawerma 1s linear infinite;
+        }
+
+        @keyframes spinShawerma {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+
+                transform: rotate(180deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+
+            }
+        }
+
+        #count {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            color: #fff;
+            font-size: 40px;
+            text-shadow: 1px 1px 0 #000;
+        }
+        #muteMusic {
+				width: 32px;
+				height: 32px;
+				background: url(audio_icon.png) no-repeat;
+				background-size: 32px;
+				background-position: 0 -32px;
+				cursor: pointer;
+				position: absolute;
+				bottom: 20px;
+				right: 10px;
+				opacity: 0.8;
+			}
+        @media (max-width: 1000px) {
+            img{
+                width: 90%;
+            }
+        }
+        @media (max-width: 500px) {
+            #count {
+                font-size: 35px;
+            }
+            img{
+                width: 140%;
+            }
+        }
+
+        #player{
+            position: absolute;
+            right: -1000px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <img src="shawarma.png">
+
+    <span id="count">1</span>
+
+    <div id="player">
+        <audio id="music" src="Въеби ему, Донателло! – Одну шаурму в обычном лаваше, пожалуйста.mp3" controls preload="auto" autobuffer autoplay type="audio/mpeg" muted></audio>
+    </div>
+    <div id="muteMusic"></div>
+    <script>
+
+        let count = document.querySelector('#count');
+        let music = document.querySelector('#music');
+        let muteMusic = document.querySelector('#muteMusic');
+        let audio = document.querySelector('audio');
+
+        window.setInterval(countshawa, 1000);
+
+        function countshawa() {
+
+            count.innerHTML = +count.innerHTML + 1;
+        }
+
+        muteMusic.onclick = function() {
+				audio.muted = audio.muted ? false : true;
+				muteMusic.style.backgroundPosition = audio.muted ? '0px -32px' : '0 0';
+				audio.play();
+			};
+     
+    </script>
+</body>
+
+</html>
